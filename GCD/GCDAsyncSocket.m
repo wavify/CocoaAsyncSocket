@@ -5624,7 +5624,9 @@ enum GCDAsyncSocketConfig
 		
 		if (!error)
 		{
-			[self maybeDequeueWrite];
+      dispatch_async(socketQueue, ^{ @autoreleasepool {
+        [self maybeDequeueWrite];
+      }});
 		}
 	}
 	else
